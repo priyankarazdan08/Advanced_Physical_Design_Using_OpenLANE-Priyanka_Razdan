@@ -175,3 +175,95 @@ RTL into logic circuits using generic components. Synthesis exploration report s
 Regression Training:
 -> Run exploration on several designs using best configs.
 -> Run openLANE on ~70 designs and compare the results to the best known ones. 
+
+DFT: 
+-> Scan Insertion; Automatic Test Pattern Generation (ATPG); Test Patterns Compaction; Fault Coverage; Fault Simulation;
+
+After this is physical implementation:
+Used with openROAD app: 
+PnR: Floor/Power Planning; End Decoupling Capacitors and Tap cells insertion; Global and Detailed Placement; CTS; Global and Detailed Routing
+
+Logic Equiablence Checking:
+Compare netlist to getlevel netlist to make sure they're equiavalent, otherwise something is wrong. 
+
+When a metal wire segment is fabricated, it can act as an antenna- recieves charges that can harm transistor gates that can be damaged during fabrication. Length of wires on transistor gates must be limited (job of router). If router fails -  2 solutions
+1) briding attaches a high layer intermediary (requires routing awarenesS)
+2) Add antenna diode cell to leak away charges; antenna diodes are provided by SCL.
+
+OpenLANE uses a preventive approach:
+1) adds a fake antenna diode next to every cell input after placement
+2) run the antenna checker (magic) on the routed layout
+3) if the checker reports a violation on the cell input pin, replace the fake diode cell with a real one. 
+
+Magic is used for DRC (design ruels checking) and SPICE extraction from layout.
+Magiv and Netgen are used for LVS
+	-> Extracted SPICE by magic vs. verilog netlist
+
+**Get Familiar to open-src EDA tools:
+**
+OpenLANE Directory structure in detail 
+
+1) cd work/tools/ (open dir)
+2) ls -ltr (to list everything in chronological order)
+3) cd openlane_working_dir
+4) ls -ltr
+5) cd openlane
+
+<img width="753" height="170" alt="image" src="https://github.com/user-attachments/assets/adb1202a-2e4b-4e10-8425-ae3e7c2aecd0" />
+
+<img width="787" height="187" alt="image" src="https://github.com/user-attachments/assets/f3ae9381-8984-4493-82fc-d2e59493f6d3" />
+
+PDKs are the project design kit~ ours is skywater 130
+openlane is built around this specific pdk. If you open the pdk dir, you can see the sky-water-pdk which has all the info about our pdk. sky130A is our pdk that contains the files about our tools & tech assciated with out pdk. if you open sky130A you'll see libs.ref and libs.tech. ref contains the files abt the tools and tech contains the files about the tech. 
+
+if cd lib in sky130_fd_sc_hd: 
+tt -> typical
+ss -> slow slow
+ff -> fast fast
+more files about pdk. 
+
+use cd .. mutliple times then use cd openlane to open openlane
+
+<img width="753" height="290" alt="image" src="https://github.com/user-attachments/assets/c18554f8-b872-4152-a942-132a72128fb3" />
+
+For mac users: 
+use bash <(curl -s https://raw.githubusercontent.com/ZimengXiong/bASICs-openlane-apple-silicon-vm/refs/heads/main/patch-1.sh) in your normal terminal then close the terminal tab. Instead of docker use the openlane Launch on desktop (sry if u don't have one :() and you're already in the openlane container. 
+
+Then do ./flow.tcl -interactive (as the video stated and keep going) keep in mind picorv32a now exists one folder deeper and you need go through designs and ci before reaching it. 
+
+<img width="787" height="400" alt="image" src="https://github.com/user-attachments/assets/74a4b933-3692-4606-bf89-e4808aeb9e2d" />
+
+if you want to exit the openlane flow envt you need to write the command exit otherwise you stay in it. if you don't do the previous step you would be int he openlane container as shown above and can't perform many commands unique to openlane. 
+
+<img width="787" height="508" alt="image" src="https://github.com/user-attachments/assets/97e93e5d-c2df-48a6-94ac-12ce47282460" />
+
+go back to the vid and begin to his commands.
+1) package require openlane
+2) prep -design designs/ci/picorv32a
+
+src- is where verilog file for rtl is present
+config.tcl- all the files are picked from here; contains time period (overrides setting)
+
+what the prep step does is it creates/merged new lef files in order to prep for the design. to make sure you did the step right, open a new tab in terminal (make sure it's not in the openlane envt) and check in openlane/designs/ci/picorv32a/runs and make sure theres a new file called runs. 
+
+<img width="792" height="621" alt="image" src="https://github.com/user-attachments/assets/a371936a-bf6b-4c8f-ada6-27aa0b2c04c3" />
+
+1) cd runs
+2) ls -ltr (might need to cd into most recent run folder inside runs if performed prep multiple times)
+3) cd tmp
+you will notice lef files inside of tmp that were prepared from ur prep step. Won't be inside anything inside synthesis bc nothign has been run yet. (need to access from results folder) There will be reports and logs created to every step in the future.
+
+cmds.file takes account of all the commands u used. 
+
+go back to ur openlane envt:
+1) run_synthesis
+
+efabless/openlane on github would have everything you need to know. 
+<img width="792" height="621" alt="image" src="https://github.com/user-attachments/assets/c12452c8-ec05-4cdf-af7e-996068008b8a" />
+
+
+
+
+
+
+ 
