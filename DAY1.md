@@ -261,6 +261,16 @@ go back to ur openlane envt:
 efabless/openlane on github would have everything you need to know. 
 <img width="792" height="621" alt="image" src="https://github.com/user-attachments/assets/c12452c8-ec05-4cdf-af7e-996068008b8a" />
 
+<img width="614" height="280" alt="image" src="https://github.com/user-attachments/assets/ae9d079d-45cb-430b-b867-3c7225daa0ab" />
+
+These commands must be run in this order otherwise the commands will fail. You can't run routing without first running cts. 
+
+<img width="590" height="533" alt="image" src="https://github.com/user-attachments/assets/af2c6477-83e6-4faa-8d22-33680b7feb10" />
+
+If you go back to the normal terminal and open the run/temp/synthesis folder you'll no longer see that its empty. Since we completed the synthesis step we can see that it's populated with files. 
+
+if you want to check the reports. cd back into temp and you can see the reports created for all the steps including synthesis (which should be only one populated). 
+after less you can exit the screen by typing q.
 
 
 
