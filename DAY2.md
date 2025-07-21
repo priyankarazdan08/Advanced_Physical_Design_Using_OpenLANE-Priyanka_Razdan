@@ -105,9 +105,7 @@ to see layout check magic
 
 ok, the reason it is very long is because you must download magic and then use the command otherwise it won't work. This tab should pop up on the command:
 
-<img width="1440" height="861" alt="image" src="https://github.com/user-attachments/assets/bbd876f0-eb96-4554-86a5-783acff4ade8" />
-
-
+<img width="1361" height="756" alt="image" src="https://github.com/user-attachments/assets/4d5555c9-9f96-4c97-acc0-c62f5306055b" />
 
 Select the layout and move it to the center of the display. Select s on your keyboard (will see it get highlighted) and then press v (will fit layout on screen). To zoom in: left mouse click and right mouse click to form box you want to zoom to then  you press z. 
 
@@ -117,10 +115,7 @@ press s on keyboard to highlight layer. then if you go into menu and type what y
 
 standard cells exist in the lower left area. zoom in on the area. 
 
-
-
-
-
+<img width="761" height="756" alt="image" src="https://github.com/user-attachments/assets/b81b1f48-115d-4b09-b481-b69ee43620a9" />
 
 
 Netlist bdinging and inital place design:
@@ -159,6 +154,134 @@ Routing comes next- needs certain flow; depending on characteristics of the ff u
 One thing is common across all stages "Gates or Cells"
 
 <img width="148" height="180" alt="image" src="https://github.com/user-attachments/assets/5be2d170-96e3-48df-a8de-2f64b1cd9acf" />
+
+Placement in OpenLane occurs in 2 stages: 1 is global and the other is detailed placement. There are different tools to do both of those functionailities. 
+
+Global placement is course plament: there is no legalizations happening. Global placement just optimizes placement so it allows overlap and has some illegal placement that can't actually be on a chip. Main objective is to reduce the wire length. 
+
+after floorplan & synthesis:
+do run_placement in the openlane environment. If you closed the terminal like me, you probably need to recreate it by running synthesis then floorplan again. This will create a new run folder with todays time. 
+
+
+After running placement- both phases should be complete and running magic should allow you to see the new placmenet of cells. 
+
+1) make sure you are in your current run folder/results/placement
+2) use the same command as before: magic -T home/beaver/Desktop/work/tools/openlane_working_dir/pdks/sky130A/libs.tech/magic/sky130A.tech lef read ../../tmp/merged.nom.lef def read picorv32.def
+
+PSA- since we're running a newer version of openlane we are using merged.nom.lef instead of merged.lef. merged.lef wasn't created after running synthesis step. 
+
+<img width="890" height="756" alt="image" src="https://github.com/user-attachments/assets/ae46401c-79b3-4e15-bf44-70223db36e18" />
+
+<img width="890" height="756" alt="image" src="https://github.com/user-attachments/assets/ed12c1b1-88f6-4a79-b589-a3f72780d947" />
+
+after zooming in you can see the different placement in standarad cells. powerplanning post cts. 
+
+
+Cel Design Flow:
+
+<img width="820" height="461" alt="image" src="https://github.com/user-attachments/assets/68e96e0d-52aa-40c8-9109-8b2855c088ff" />
+
+if you pick up any of the cells in the design- they are referred to as standard cells. Standard cells are placed in a section called libraries:
+-> The library has got different gates with different functionalities. Library also contains different sizes of each functionality- referred to as drive strength. Library contains physical characteristics, functionalities, and contains information about threshold voltage of different kinds of standard cells. 
+
+<img width="820" height="461" alt="image" src="https://github.com/user-attachments/assets/0dfa0e8a-d1b9-4856-933c-d3c9c35376be" />
+
+Each standard cell has to go through the typical steps of the cell design flow. Even something as small as an inverter. 
+
+The cell design flow is being divided into 3 parts. 
+1) Inputs- The inputs u need to design your standard cell
+2) Design Steps- the steps to design it
+3) Outputs- the ones you actually use with the eda tools.
+
+The inputs:
+PDKS (process design kids): 
+-> DRC & LVS rules, SPICE models, library & user-defined specs. 
+-> DRC & LVS: Each contains rules for being able to design the cell. Foundry Rules are very important and must be followed in order to create a viable cell. There can be thousands of rules in the typical IC design flow. 
+
+
+-> Spice models: 
+contains parameters & equations for things like threshold voltage & other rules that must be followed in order to fabricate the cell. 
+
+-> Library and User-defined specifications:
+Cell-heright is determined by power rail and ground rail. Responsibilty of developer that the cell height is maintained. The cell width is dependent on the timing of formation. resonsibility of library developer. This isn't defined by the foundry rather defined by the user. Another example that is defined by the user is supply voltage- which is provided by the top level developer. Must follow all these rule once set. Another example is metal layers- might be a requirement that the metal layers should be built on specific metal layers(ex: metal1 metal2 metal3). Pin location, Drawn gate-length are other typical example of user-defined specs. 
+
+It is the responsibilty of the dev to take the inputs and come up w a cell that aligns with these rules so that it is possible to create. 
+
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/d0c907fb-b302-4621-a4ab-2ce9c0226108" />
+
+Design Steps:
+
+-> Circuit Design (mostly based on SPICE simulations):
+1) implement function itself
+2) model pmos and nmos transisitor in order to meet library requirements. (drains shoudl add up to 0 usualy)
+
+-> Layout Design
+1) Get function implemented through a mos transisotr
+2) get pmos and nmos netword graph out of design you've implemented
+
+Euler's path is a path traced only once -> need this for pmos and nmos network graph. Next step is to draw a stick diagram out of it.
+
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/f9213b6c-8891-4b2d-af0c-e74d66c95f00" />
+
+characterization:
+get timing, noise, power .libs, functionality of specific circuit. 
+
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/932fb3d4-6bb0-4d72-b456-ec706bec2a16" />
+
+the extracted spice netlist will give you some informatoin about the standard cell. nmos spice models are nothign but chracteristics of nmos transistor. 
+1) Read Model Files
+2) Read Extracted Spice Netlist
+3) Analyze behavior of buffer
+4) Read the subcircuts of the inverter
+5) attach the necessary power soruces (vdd, gnd)
+6) to apply the stimulus
+7) provide necessary output capacitance
+8) provide necessary simulation commands
+   
+These are 8 diff characterization steps. 
+
+put these 8 steps in -> Guna -> gives a model with timing, noise, power .libs, function
+= means we have the timing chracterization, power characterization, and noise characterization. 
+
+Timing Characterization:
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/5655952e-2256-4fe5-8e63-ca9520ff92c6" />
+
+Has waveforms from both inverters (red is output of first inverter) which goes as the input to the second inverter (blue)
+
+Low = means values that are close to 0 power supply
+
+Calculation of slew rise: take timing between points 20 percent from high point and 20 percent from low point. 
+
+in_rise_thres = if you want to calculate delay- you need points to calculate the delay. Take 50% point of slew waveform that's input. 
+out_rise_thr = 50% of output waveform thats output. 
+
+if you apply fall the def and wording remains the same- except for the fall waveforms. 
+
+Propogation Delay:
+time (out thres) - time (in thres)
+should give exact delay!
+
+
+if the threhold points move- the delay will probably be wrong. 
+If delay is negative- you've usually had poor choice in choosing rhe points for thresholds in input and output. 
+
+If your circuit isn't designed properly and even if u did pick the right points for thresholds in input and output- you will still get a negative delay which means you didn't optimize your wires and are experiencing huge wire delays. 
+Ex: 
+
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/a9712757-1f1f-4a68-850b-044ad7725371" />
+
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/061cd274-3aed-4b76-8e0a-7bfe892c0a76" />
+
+Transistion Times:
+For rise waveoform-> time(slew_high_rise_thr) - time(slew_low_rise_thr)
+For falling waveoform-> time(slew_high_fall_thr) - time(slew_low_fall_thr)
+
+<img width="674" height="375" alt="image" src="https://github.com/user-attachments/assets/52b3bbee-a1ab-46c4-a978-6dcf57be1d8a" />
+
+
+
+
+
 
 
 
