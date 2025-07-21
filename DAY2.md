@@ -150,7 +150,19 @@ connections between different ffs are in differnet layers. for example the blue 
 
 
 Library characterization and modelling:
-CTS is the next step after placement. ClockTree Synthesis will take care of the clock signal for equal rise and fall time. 
-Routing comes next- needs certain flow; depending on characteristics of he ff ur trying to route. 
+
+Spread out gates based on functionality or based on logical connection that we get out of logical sunthesis step. We take care of the distance between gates with buffers as its not a problem as each different type is on differnt layers.
+
+CTS is the next step after placement. ClockTree Synthesis will take care of the clock signal for equal rise and fall time. Very important & related to library characterization step. 
+Routing comes next- needs certain flow; depending on characteristics of the ff ur trying to route. 
+
+One thing is common across all stages "Gates or Cells"
+
+<img width="148" height="180" alt="image" src="https://github.com/user-attachments/assets/5be2d170-96e3-48df-a8de-2f64b1cd9acf" />
+
+
+
+
+
 
 
