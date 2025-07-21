@@ -120,6 +120,10 @@ if you cd into the new github you can see all the files that were availble onlin
 
 <img width="789" height="74" alt="image" src="https://github.com/user-attachments/assets/29ad4b95-7136-4ee8-a739-241f9f6d4bb8" />
 
+
+<img width="1051" height="591" alt="image" src="https://github.com/user-attachments/assets/b8718142-8867-4c5e-aea1-3964a174ba0e" />
+
+---------------
 cd /home/beaver/Desktop/work/tools/openlane_working_dir/
 
 wget http://opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
@@ -130,12 +134,21 @@ cd drc_tests
 
 ls -al
 
-# view with VIM, not GVIM which is not installed
-# vi .magicrc
+view with VIM, not GVIM which is not installed
+vi .magicrc
 
-magic -d XR &
+<img width="789" height="529" alt="image" src="https://github.com/user-attachments/assets/1456c14a-70a5-46fd-b7e2-4e7fe17ff57a" />
+
+make sure you: ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign$ cp sky130_inv.mag ~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign/drc_tests
+
+now inside drc files that was downloaded through the mac silicon patch run the code the instructor gave:
+inside VM:
+
+beaver@openlanevm:~/Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign/drc_tests$ magic -T sky130A.tech sky130_inv.mag &
 
 ----------------
+Basically before the tech file was either corrupted or not suited for apple silicon. Once you load the patch a new sky130A.tech file will come with it in drc_tests. So, now that I have the right technology you can just copy the mag file and everything should work properly. 
+
 
 16-mask CMOS process
 1) Selecting a substrate
@@ -176,9 +189,72 @@ Use phosphorous as material -for n-well; energy needed is 400keV whihc is higher
 
 Place the whole thing into a high temp furnace- will cause drive-in diffusion. Will create 2 distinct wells. 
 
+
 <img width="713" height="399" alt="image" src="https://github.com/user-attachments/assets/5ef49164-654d-46c7-abaf-f68e31415868" />
 
 next we have to create a gate. Create 2 diff gates for pmos and nmos. 
+
+1) Use another mask (4) on top of the n-well (first put on photoresist) then apply UV light. N-well stays protected.
+2) After UV mask goes away
+3) Want boron (low energy) to slightly dope the top of the pwell
+4) put the mask(5) ontop of p-well (once its doped the way u wnt it) obv put on photoresist before the mask. Then apply UV light.
+5) Apply Arsenic to dope a slight level of n-well.
+
+<img width="713" height="399" alt="image" src="https://github.com/user-attachments/assets/194760b0-aa83-4797-a9ce-c28c4584415a" />
+
+
+<img width="713" height="399" alt="image" src="https://github.com/user-attachments/assets/bf030357-296a-4800-ba89-833567f7d2bd" />
+
+Original oxide etched/stripped using dilute hydrofluoric(HF) solution. Then re-grown again to give high quality oxide (~10 nm thin)
+
+1) Deposit a ~0.4 um polysilicon layer using normal deposition techniques.
+2) Dope it with more impurities (N-type (phosphorous or arsenic) ion implants for low gate resistance)
+
+<img width="713" height="399" alt="image" src="https://github.com/user-attachments/assets/1849f50e-3166-445f-9d5c-7d13b478b504" />
+
+3) Deposit photoresist then add the Mask (6)
+4) etch away the excess photoresist and the mask is etched away.
+5) Then through the UV the rest of the mask not under the photoresist is etched away as well
+
+<img width="713" height="399" alt="image" src="https://github.com/user-attachments/assets/a6ea8312-f303-4358-97f6-6e569ba392b2" />
+
+Lightly doped drain (LDD) formation:
+P+, P-, N
+N-well where ur trying to fabricate the pmos
+P+ is src and drain are p-type
+P- is the lightly doped drain formation that we're trying to do now. 
+
+Similary for nmos (being fabricated in the pwell):
+N+ is the src and drain that is n-type
+N- ~ one we're going to form now
+P is what you already see. 
+
+<img width="713" height="399" alt="image" src="https://github.com/user-attachments/assets/42a4b90a-347e-4544-9963-a1507708494b" />
+
+Why we need LDD formation:
+
+-> hot electron effect:
+High energy carriers break Si-Si bonds
+Energies might be so high that it breaks 3.2eV barrier built with Si conduction band & might enter SiO2 band which will create issues.
+
+-> Short channel effect:
+For shorter channels the drain field penetrates channel. The gate basically can't control the src or the drain current. 
+
+ 1) place photoresist on top of the n-well side & add a mask on top of that (7)
+ 2) UV light will be directed on the CMOS (standard steps will remain the same)
+ 3) Place phosphorous (or other n-type impurity) and implant it in the pwell to create a n-implant. To create an n- coping concentration. Very lihgtly doped.
+
+<img width="517" height="285" alt="image" src="https://github.com/user-attachments/assets/b21d5a6a-346c-4a96-9052-b1ed779b1bdf" />
+
+4) Repeat the process covering the p-well with the photoresist and mask8
+5) next dope n-well with p-impurity: boron
+
+Plasma anisotropic etching.
+<img width="517" height="285" alt="image" src="https://github.com/user-attachments/assets/b39dedf0-c13b-4867-9cbd-d0cea101ccc9" />
+removes all oxide from each part of structure. Helps prevent the most imporant oxide from getting etched away. 
+
+
+How does Src and Drain formation happen. 
 
 
 
