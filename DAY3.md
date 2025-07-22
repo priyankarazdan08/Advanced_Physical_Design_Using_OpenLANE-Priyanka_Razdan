@@ -249,8 +249,9 @@ For shorter channels the drain field penetrates channel. The gate basically can'
 4) Repeat the process covering the p-well with the photoresist and mask8
 5) next dope n-well with p-impurity: boron
 
-Plasma anisotropic etching.
 <img width="517" height="285" alt="image" src="https://github.com/user-attachments/assets/b39dedf0-c13b-4867-9cbd-d0cea101ccc9" />
+
+Plasma anisotropic etching.
 removes all oxide from each part of structure. Helps prevent the most imporant oxide from getting etched away. 
 
 
