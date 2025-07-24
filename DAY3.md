@@ -331,6 +331,27 @@ Mask15 to add more layers of aluminum on top of the contact holes. As you go fro
 This is what your final cmos should look like during fabrication. You still need to drill holes on top of the Si3N4 in order for there to be contact throughout your cmos. 
 
 
+Image credits: Ojasvi Shah ~ OpenLane Github Repo (https://github.com/ojasvi-shah/Advanced-Physical-Design-Using-OpenLANE--Ojasvi-Shah/blob/main/DAY%203.md)
+<img width="686" height="582" alt="image" src="https://github.com/user-attachments/assets/e5c91ee1-d2b4-4bbd-80af-005299e18675" />
+
+On the right side all the colors are the layers the you can choose. 
+Ex:
+Metal1 ~ light purple
+Metal2 ~ pinkish color
+N-Well ~ Solid dark dashed lines
+
+Hover over a color ~ it'll tell you what the layer means at the top. 
+When selecting a layer (use s), move to the tkcon window and simply type what. The what will explain what the highlighted portion. 
+
+If you want to see if there are ocnnections between 2 different parts of a circuit, press s 3 times.
+
+<img width="481" height="510" alt="image" src="https://github.com/user-attachments/assets/4a2384f7-0d55-4650-b939-5fdf137520cd" />
+
+LEF only contains material about where to place a cell. So, in the abstract you can see that it only has info about placement and not connectivity.
+
+
+
+
 
 
 
