@@ -255,7 +255,81 @@ Plasma anisotropic etching.
 removes all oxide from each part of structure. Helps prevent the most imporant oxide from getting etched away. 
 
 
+
+
 How does Src and Drain formation happen. 
+
+Channeling is an effect where you do a lot of ion implantation if the vector velocity of the ions matches the velocity of the crystaline structure of the p-type substrate. The atoms might go deep- without even getting blocked. So we add thin screen oxide to avoid channeling during implants. 
+
+<img width="640" height="372" alt="image" src="https://github.com/user-attachments/assets/cf4f028d-6838-4ad9-a24a-1c142745c16f" />
+
+1) Add mask 9 nwell
+2) add arsenic (n-type impurity) 75 keV
+3) p- implant in nwell and n+ implant in p-well
+4) add mask 10 on top of p-well
+5) add boron in n-well (p-type impurity for p- plant)
+
+<img width="640" height="343" alt="image" src="https://github.com/user-attachments/assets/abe659f8-1403-4714-bd92-974b5d8a5aa5" />
+
+High temperature annelling. 
+
+7) Steps to form contacts and interconnects (local)
+
+Etch thin oxide in Hydrofloruic soltion. Gate and Src drain are open for contact. 
+Deposit titanium on wafer surface, using sputtering. Titanium has very low resistivity which is why we're using it. 
+
+Take a Ti metal and hit it with Argon and allow it to deposit on a substrate. 
+
+<img width="542" height="296" alt="image" src="https://github.com/user-attachments/assets/184b6e20-0391-4c7a-ac9a-fa2834366c37" />
+
+Titanium gets placed over the substrate. 
+low resistance TiSi2 on top
+Next, Waver heated at about 650-700 C in N, ambient for 60 sec. 
+TiN is the result and placed on top of the TiSi2
+
+
+<img width="542" height="296" alt="image" src="https://github.com/user-attachments/assets/19edb246-d747-4a34-994f-f3aefda5b2e4" />
+
+Place photoresist then Mask11 on top of some drains 
+
+Mask is removed and then TiN (light blue) is etched off using RCA cleaning. 
+Remove photoresist now. Left with the some drains having TiN left on. 
+
+Deposit 1 um of SiO2, doped with phosphorous or boron deposited on wafer surface. Phosphorous acts as a protection layer (barrier) against the sodium ions. Boron is used to reduce the temperature. The wafer will be exposed to higher temps or certain processes that need higher temperature.
+
+Polish the wafer- chemical mechanical polishing (CMP) technique fro planarizing the water surace. A little complex, but won't get into that for now. 
+
+Next step is to create contact poles,
+Create pins and for connections down the subtrates. 
+
+<img width="579" height="309" alt="image" src="https://github.com/user-attachments/assets/fa173a87-d654-439e-b69c-c244942c975c" />
+
+Mask/photoresist placement depends on where you want to drill the contact poles. Anywhere you want to drill them is where you'll create a small break in photoresist/mask. Above shows the vids example. 
+
+Deposit thin layer of ~10nm TiN
+Acts as a good barrier layer between the bottom and top interconnects. 
+
+Blanket tungsten (W) layer deposition- help create a good contact from bottom to top. 
+
+Again CMP technique and remove extra tungsten for planarizing wafer surface. 
+Use alumninum layer at the top level and add mask 13/photoresist & etch out any alumnimum not directly under the photoresist. 
+
+Add another hgihter level metal!!!
+
+Deposit SiO2 and use CMP to polish; then go through normal photolithography steps to drill the contact holes (mask 14). 
+
+Depost a small TiN layer between and then deposit tungsten again as contacts holes. 
+
+<img width="579" height="309" alt="image" src="https://github.com/user-attachments/assets/d642cc72-3ab1-4761-b719-b1f17362a342" />
+
+this is the same as the first layer of interconnects that I already wrote before. 
+
+Mask15 to add more layers of aluminum on top of the contact holes. As you go from bottom to top the thickness of the interconnects increases. Deposity Si2N4 to protect the chip as a whole. 
+
+<img width="579" height="309" alt="image" src="https://github.com/user-attachments/assets/510be848-fb58-4480-9d84-c50c47cd2ba3" />
+
+This is what your final cmos should look like during fabrication. You still need to drill holes on top of the Si3N4 in order for there to be contact throughout your cmos. 
+
 
 
 
