@@ -350,6 +350,18 @@ If you want to see if there are ocnnections between 2 different parts of a circu
 LEF only contains material about where to place a cell. So, in the abstract you can see that it only has info about placement and not connectivity.
 
 
+Lab Steps to create STD Cell Layout and Extract SPICE Netlist:
+
+Enter the following command in tkcon (the window that pops up when running magic) in order to recieve the SPICE netlist from the layout. 
+
+-> extract all
+-> ext2spice cthresh 0 rthresth 0 
+-> ext2spice
+
+if you go back and open the Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign (whereever your magic was) you should see a new file called sky130_inv.spice. whihc is the netlist that was just extract. 
+
+<img width="363" height="272" alt="image" src="https://github.com/user-attachments/assets/3481398c-e610-48c1-a0cb-b7ae463e3fca" />
+
 
 
 
