@@ -331,8 +331,9 @@ Mask15 to add more layers of aluminum on top of the contact holes. As you go fro
 This is what your final cmos should look like during fabrication. You still need to drill holes on top of the Si3N4 in order for there to be contact throughout your cmos. 
 
 
-Image credits: Ojasvi Shah ~ OpenLane Github Repo (https://github.com/ojasvi-shah/Advanced-Physical-Design-Using-OpenLANE--Ojasvi-Shah/blob/main/DAY%203.md)
-<img width="686" height="582" alt="image" src="https://github.com/user-attachments/assets/e5c91ee1-d2b4-4bbd-80af-005299e18675" />
+Image credits: Nikson-Jose/VSDSTDcellDesign Github Repo
+<img width="378" height="263" alt="image" src="https://github.com/user-attachments/assets/3b9e7f31-24a1-47c7-a1e6-77afa5cd56c4" />
+
 
 On the right side all the colors are the layers the you can choose. 
 Ex:
@@ -349,8 +350,9 @@ If you want to see if there are ocnnections between 2 different parts of a circu
 
 LEF only contains material about where to place a cell. So, in the abstract you can see that it only has info about placement and not connectivity.
 
-
 Lab Steps to create STD Cell Layout and Extract SPICE Netlist:
+
+When selecting- white dotted line means node error. Click DRC tab and then the tool will zoom in on what the error actually is. Then the tools will write the error in the tkcon window. 
 
 Enter the following command in tkcon (the window that pops up when running magic) in order to recieve the SPICE netlist from the layout. 
 
@@ -360,7 +362,94 @@ Enter the following command in tkcon (the window that pops up when running magic
 
 if you go back and open the Desktop/work/tools/openlane_working_dir/openlane/vsdstdcelldesign (whereever your magic was) you should see a new file called sky130_inv.spice. whihc is the netlist that was just extract. 
 
-<img width="363" height="272" alt="image" src="https://github.com/user-attachments/assets/3481398c-e610-48c1-a0cb-b7ae463e3fca" />
+<img width="811" height="319" alt="image" src="https://github.com/user-attachments/assets/18d4b7b8-3868-4125-8c82-eb05b7bb8b69" />
+
+<img width="850" height="503" alt="image" src="https://github.com/user-attachments/assets/ed16e003-208d-4363-a6a9-1b4d5bc1cae4" />
+This image shows the new spice extracted file. 
+
+-> nano sky130_inv.spice
+This shows the contents of spice file (will need to sudo)
+
+<img width="959" height="642" alt="image" src="https://github.com/user-attachments/assets/d9331c5a-9418-4953-a64c-73f43a9d6aa6" />
+
+pshort means pmos and nshort means nmos
+
+In order of Drain, Gate, Src, Substrate. 
+
+<img width="333" height="373" alt="image" src="https://github.com/user-attachments/assets/786c1a02-a424-43c1-85ca-ec4e5a55a9fc" />
+
+This is what the extracted spice file is telling us. 
+
+
+<img width="781" height="647" alt="image" src="https://github.com/user-attachments/assets/38c38da3-1657-49e9-97b2-ad785b8e9451" />
+
+
+Lab Introduction to Magic tools options and DRC rules
+
+The goal is the find problems in the lab and fixing the errors. 
+CIF ~ Caltech Intermediate Format is a human readable ASCII format. 
+CIF and GDS are used interchangably. 
+
+Documentation @ opencircuitdesign.com/magic/ or ../technologyfiles/
+
+They also detail the rules about verification. Skywater 130 pdk is open src created by google. 
+
+
+Lab introduction to sky130 pdk's and steps to download labs
+
+documentation @ skywater-pdk-130.org/readthedocs.build/en/136
+
+opencircuitdesign.com/open_pdks/archive/drc_tests.tgz
+
+Lab Introduction to Magic and steps to load Sky130 tech-rules:
+
+-> magic -d XR in drc_tests
+-> file then open met3.mag
+
+<img width="929" height="742" alt="image" src="https://github.com/user-attachments/assets/7805854d-599a-4ed8-a1a7-a6834c9432a0" />
+
+-> cif see VIA2 in tkcon
+
+<img width="357" height="211" alt="image" src="https://github.com/user-attachments/assets/98c1dace-0d92-441d-97a4-e063d7ecf995" />
+
+<img width="595" height="432" alt="image" src="https://github.com/user-attachments/assets/e0820ac9-d7b2-4187-b917-45d7fe243feb" />
+
+First find the error, so nano the sky130A.tech file. 
+DRC rule starts on line 4702.
+
+<img width="865" height="725" alt="image" src="https://github.com/user-attachments/assets/58985ff5-1155-4a34-abce-095337cd1106" />
+
+Then look for poly.9
+
+<img width="865" height="725" alt="image" src="https://github.com/user-attachments/assets/7e6f14df-24f1-4496-9ea2-021bedf062e6" />
+
+Update tech file in spacing line and replace *nsd to allpolynonres. 
+
+Then in order to update magic just run DRC check in the tkcon window and you don't have to relaunch magic. 
+
+
+Every n-well must have an n-tap layer in contact. 
+
+<img width="865" height="725" alt="image" src="https://github.com/user-attachments/assets/4552a684-5235-42f1-8f07-bad6a7b63e4d" />
+
+Added variant (full) & variant * to the top and bottom of new nwell_untapped rule. Need to check if it works using the same nwell load command. 
+
+<img width="437" height="334" alt="image" src="https://github.com/user-attachments/assets/8ec98738-6f7a-46a1-b801-46c3332ed39f" />
+
+when the tech file was modified the spacing between npolyres and all types of diffusion were not considered which is by definition- an error
+-> easy fix is changing the *nsd to alldiff.
+
+temp layers have unique features that can be used as building blocks for other layers. 
+
+
+
+
+
+
+
+
+
+
 
 
 
