@@ -23,12 +23,53 @@ In magic if you press g the grids get activated and then zoom in you can see the
 
 go into tkcon window:
 grid 0.46um 0.34um 0.23um 0.17um 
-gird [xSpacing [ySpacing [xOrigin yOrigin]]]
+grid [xSpacing [ySpacing [xOrigin yOrigin]]]
 
 incrreases each invididual grid size
 
 <img width="753" height="608" alt="image" src="https://github.com/user-attachments/assets/8461cd14-0c21-43e6-9429-47d4b7133129" />
 
+<img width="790" height="789" alt="image" src="https://github.com/user-attachments/assets/dcd41acd-a770-4e4b-86f9-8d217fdf8072" />
+
+
+new grid sizes get bigger after changing grid size in tkcon
+
+select port then write what to get information about what was selected. 
+
+save sky130_vsdinv.mag
+(command in tkcon)
+
+go back to vsdstdcelldesign/drc_tests and you can see new file saved called sky130_vsdinv.mag
+
+<img width="790" height="789" alt="image" src="https://github.com/user-attachments/assets/de004639-48bb-4862-8b13-21225593f2ae" />
+
+magic -T sky130.tech sky130_vsdinv.mag &
+type this in right after in same directory
+
+now we have to extract the lif file. 
+lef write
+in tkcon
+<img width="790" height="789" alt="image" src="https://github.com/user-attachments/assets/78130c6d-d13c-4269-991c-dca657b9a927" />
+
+new lef file has been created in same dir.
+
+setting a layer as port declares pin. Lef file has all this information about pins and pin order. 
+
+<img width="790" height="789" alt="image" src="https://github.com/user-attachments/assets/5687d021-9b2d-48ae-921e-21112c75d090" />
+
+plug this into picorv32 flow. 
+
+cp sky130_vsdinv.lef ../../designs/ci/picorv32a/src
+lef file now included in src. 
+
+need to have library for cell definition for synthesis. 
+
+tool should match cell during synthesis flow so need to copy libraries into design file. 
+
+
+cp sky130_fd_sc_hd__* ../../designs/ci/picorv32a/src
+
+so that all libs get copied into src. 
 
  
 
