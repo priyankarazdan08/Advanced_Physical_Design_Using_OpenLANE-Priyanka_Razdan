@@ -47,6 +47,7 @@ handle **blockages** as they come up; **wave propogations** shoudl continue unde
 
 #### **Phase 3:**
 several valid paths should exist from **src** to **target**
+
 <img width="140" height="110" alt="image" src="https://github.com/user-attachments/assets/39fed0e9-57d7-4b5a-8b1b-492bf2205b60" />
 
 count number of **bends** in each path; **single-bend** should recieve highest priority
