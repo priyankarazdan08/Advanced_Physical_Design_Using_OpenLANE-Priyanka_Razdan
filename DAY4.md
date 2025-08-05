@@ -450,7 +450,7 @@ openroad has the openSTA integrated already so it will have the capacity to do t
 <img width="795" height="183" alt="image" src="https://github.com/user-attachments/assets/b05f9f40-ac07-4b82-9801-f12324309917" />
 
 open openroad through the openlane laucher and not the vm terminal
-read_lef /openLANE_flow/designs/picorv32a/runs/RUN_2025.08.03_01.40.39/tmp/merged.nom.lef
+read_lef /openLANE_flow/designs/picorv32a/runs/RUN_2025.08.03_01.40.39/tmp/merged.nom.lef (where it shoud be)
 reults shoudl be in the results/cts folder
 
 (couldn't find my file there is a problem with my current files~ will try to debug soon for screenshots will put commands here for now) 
@@ -492,6 +492,19 @@ set ::env(CTS_CLK_BUFFER_LIST) [lreplace $::env(CTS_CLK_BUFFER_LIST) 0 0]
 
 <img width="627" height="72" alt="image" src="https://github.com/user-attachments/assets/4a1e1d42-d200-4978-94a2-ca7aa39d08c3" />
 
+
+echo $::env(CURRENT_DEF)
+<img width="627" height="60" alt="image" src="https://github.com/user-attachments/assets/18e51c91-7f7b-4c53-8c53-b578e5791f77" />
+(can't set it currently bc doesn't exist)
+
+set ::env(CURENT_DEF) ...(file path)
+
+
+do the same flow again: (that I've already written)
+<img width="497" height="326" alt="image" src="https://github.com/user-attachments/assets/bfdd58be-cb53-480e-aa7b-f1e3bb63eecc" />
+This image is from the instructors video. 
+
+Including a larger sized clock improved slack (after reading reports), but area has taken a hit...
 
 
 
