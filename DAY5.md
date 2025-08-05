@@ -225,7 +225,7 @@ this should contian all the nets and metals associated with the net next to it. 
 
 ```bash
 cd work/tools/SPEF_EXTRACTOR
-python3 main.py [lef_file_path] [def_file_path]
+python3 main.py [where my lef file path shohuld be] [where my def file path should be] (if i had it...)
 ```
 
 <img width="500" height="90" alt="image" src="https://github.com/user-attachments/assets/f40ca950-2092-4beb-86cd-0af6b511599e" />
