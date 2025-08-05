@@ -582,7 +582,8 @@ set ::env(CURENT_DEF) ...(file path)
 ```
 
 do the same flow again: (that I've already written)
-<img width="370" height="250" alt="image" src="https://github.com/user-attachments/assets/bfdd58be-cb53-480e-aa7b-f1e3bb63eecc" />
-This image is from the instructors video. 
 
+<img width="370" height="250" alt="image" src="https://github.com/user-attachments/assets/bfdd58be-cb53-480e-aa7b-f1e3bb63eecc" />
+
+This image is from the instructors video. 
 Including a larger sized clock improved **slack** (after reading reports), but **area** has taken a hit...
